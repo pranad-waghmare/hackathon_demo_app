@@ -140,14 +140,14 @@ packages:
   finvu_flutter_sdk:
     dependency: "direct main"
     description:
-      path: "/Users/pranad/Documents/finvu_hackathon/flutter_ui_sdk/client"
+      path: "/Users/yashwantg/AndroidStudioProjects/finvu-mobile-ui/finvu_flutter_sdk/client"
       relative: false
     source: path
     version: "0.0.1"
   finvu_flutter_sdk_core:
     dependency: "direct main"
     description:
-      path: "/Users/pranad/Documents/finvu_hackathon/flutter_ui_sdk/core"
+      path: "/Users/yashwantg/AndroidStudioProjects/finvu-mobile-ui/finvu_flutter_sdk/core"
       relative: false
     source: path
     version: "0.0.1"
