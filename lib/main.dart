@@ -1,3 +1,4 @@
+import 'package:demo_app/language_selector.dart';
 import 'package:finvu_flutter_sdk/common/utils/finvu_colors.dart';
 import 'package:finvu_flutter_sdk/config/finvu_app_config.dart';
 import 'package:finvu_flutter_sdk/finvu_ui_manager.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: MyHomePage(),
     );
   }
 }
@@ -37,12 +38,13 @@ const axisPrimaryColor = Color.fromRGBO(134, 31, 65, 100); // Maroon
 const axisTextColor = Colors.white;
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+  MyHomePage({super.key});
+  var selectedLanguage = 'en';
 
   void _launchFinvuJourney(BuildContext context,
       {FinvuUIConfig? uiConfig, String? appLocale}) {
     FinvuUIManager().initialize(
-      context: context,
+      buildContext: context,
       sdkConfig: SDKConfig(
         logoUrl: 'https://example.com/logo.png',
         isPartOfAsset: false,
@@ -53,11 +55,11 @@ class MyHomePage extends StatelessWidget {
       ),
       loginConfig: LoginConfig(
         mobileNumber: '8459177562',
-        consentHandle: '6b2423a3-399b-4732-82d4-8e0b8586d8d9',
+        consentHandleId: '6b2423a3-399b-4732-82d4-8e0b8586d8d9',
       ),
       environment: Environment.dev,
       uiConfig: uiConfig,
-      appLocale: appLocale ?? 'en',
+      appLocale: appLocale ?? selectedLanguage,
     );
   }
 
@@ -231,7 +233,11 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Default Finvu
+              LanguageSelector(
+                onLanguageSelected: (locale) {
+                  selectedLanguage = locale.languageCode;
+                },
+              ),
               ElevatedButton(
                 onPressed: () => _launchFinvuJourney(context),
                 style: ElevatedButton.styleFrom(
@@ -249,7 +255,7 @@ class MyHomePage extends StatelessWidget {
               // CRED
               ElevatedButton(
                 onPressed: () => _launchFinvuJourney(context,
-                    uiConfig: _getCredTheme(), appLocale: 'hi'),
+                    uiConfig: _getCredTheme(), appLocale: selectedLanguage),
                 style: _getCredTheme().elevatedButtonTheme!.style,
                 child: const Text("CRED Journey"),
               ),
@@ -258,7 +264,7 @@ class MyHomePage extends StatelessWidget {
               // Groww
               ElevatedButton(
                 onPressed: () => _launchFinvuJourney(context,
-                    uiConfig: _getGrowwTheme(), appLocale: 'gu'),
+                    uiConfig: _getGrowwTheme(), appLocale: selectedLanguage),
                 style: _getGrowwTheme().elevatedButtonTheme!.style,
                 child: const Text(
                   "Groww Journey",
@@ -269,7 +275,7 @@ class MyHomePage extends StatelessWidget {
               // Axis
               OutlinedButton(
                 onPressed: () => _launchFinvuJourney(context,
-                    uiConfig: _getAxisTheme(), appLocale: 'ml'),
+                    uiConfig: _getAxisTheme(), appLocale: selectedLanguage),
                 style: _getAxisTheme().outlinedButtonTheme!.style,
                 child: const Text(
                   "Axis Journey",
