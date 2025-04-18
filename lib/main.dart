@@ -20,7 +20,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyHomePage(),
+      },
     );
   }
 }
@@ -54,8 +57,8 @@ class MyHomePage extends StatelessWidget {
         fiuName: 'Your FIU Name',
       ),
       loginConfig: LoginConfig(
-        mobileNumber: '8459177562',
-        consentHandleId: '6b2423a3-399b-4732-82d4-8e0b8586d8d9',
+        mobileNumber: 'username',
+        consentHandleId: 'id',
       ),
       environment: Environment.dev,
       uiConfig: uiConfig,
