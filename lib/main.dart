@@ -1,4 +1,5 @@
 import 'package:demo_app/language_selector.dart';
+import 'package:demo_app/result_page.dart';
 import 'package:finvu_flutter_sdk/common/utils/finvu_colors.dart';
 import 'package:finvu_flutter_sdk/config/finvu_app_config.dart';
 import 'package:finvu_flutter_sdk/finvu_ui_manager.dart';
@@ -45,8 +46,8 @@ class MyHomePage extends StatelessWidget {
   var selectedLanguage = 'en';
 
   void _launchFinvuJourney(BuildContext context,
-      {FinvuUIConfig? uiConfig, String? appLocale}) {
-    FinvuUIManager().initialize(
+      {FinvuUIConfig? uiConfig, String? appLocale}) async {
+    final result = await FinvuUIManager().initialize(
       buildContext: context,
       sdkConfig: SDKConfig(
         logoUrl: 'https://example.com/logo.png',
@@ -57,20 +58,27 @@ class MyHomePage extends StatelessWidget {
         fiuName: 'Your FIU Name',
       ),
       loginConfig: LoginConfig(
-        mobileNumber: 'username',
-        consentHandleId: 'id',
+        mobileNumber: '8830751044',
+        consentHandleId: '8883e122-8186-49a4-8db0-c58c65d5d0d0',
       ),
       environment: Environment.dev,
       uiConfig: uiConfig,
       appLocale: appLocale ?? selectedLanguage,
+    );
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ResultScreen(isSuccess: result as bool),
+      ),
     );
   }
 
   FinvuUIConfig _getCredTheme() {
     return FinvuUIConfig(
       primaryColor: const Color(0xFF1A1A1A),
-      secondaryColor: const Color(0xFF444444),
-      currentColor: Colors.white,
+      secondaryColor: Colors.grey,
+      currentColor: const Color.fromARGB(255, 40, 32, 32),
       textTheme: const TextTheme(
         displayLarge: TextStyle(
             fontSize: 32, fontWeight: FontWeight.w700, color: Colors.white),
@@ -107,7 +115,7 @@ class MyHomePage extends StatelessWidget {
     return FinvuUIConfig(
       primaryColor: growwPrimaryColor,
       secondaryColor: Colors.white,
-      currentColor: Colors.white,
+      currentColor: const Color.fromARGB(255, 157, 240, 171),
       textTheme: const TextTheme(
         displayLarge: TextStyle(
             fontSize: 28, fontWeight: FontWeight.w600, color: growwTextColor),
@@ -145,7 +153,7 @@ class MyHomePage extends StatelessWidget {
     return FinvuUIConfig(
       primaryColor: jupiterPrimaryColor,
       secondaryColor: jupiterTextColor,
-      currentColor: jupiterTextColor,
+      currentColor: const Color.fromARGB(255, 140, 168, 196),
       textTheme: const TextTheme(
         displayLarge: TextStyle(
             fontSize: 30, fontWeight: FontWeight.bold, color: jupiterTextColor),
@@ -189,7 +197,7 @@ class MyHomePage extends StatelessWidget {
     return FinvuUIConfig(
       primaryColor: axisPrimaryColor,
       secondaryColor: axisTextColor,
-      currentColor: axisTextColor,
+      currentColor: const Color.fromARGB(255, 237, 132, 132),
       textTheme: const TextTheme(
         displayLarge: TextStyle(
             fontSize: 28, fontWeight: FontWeight.bold, color: axisTextColor),
