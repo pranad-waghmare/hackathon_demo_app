@@ -39,7 +39,8 @@ const axisTextColor = Colors.white;
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
-  void _launchFinvuJourney(BuildContext context, {FinvuUIConfig? uiConfig}) {
+  void _launchFinvuJourney(BuildContext context,
+      {FinvuUIConfig? uiConfig, String? appLocale}) {
     FinvuUIManager().initialize(
       context: context,
       sdkConfig: SDKConfig(
@@ -56,6 +57,7 @@ class MyHomePage extends StatelessWidget {
       ),
       environment: Environment.dev,
       uiConfig: uiConfig,
+      appLocale: appLocale ?? 'en',
     );
   }
 
@@ -246,8 +248,8 @@ class MyHomePage extends StatelessWidget {
 
               // CRED
               ElevatedButton(
-                onPressed: () =>
-                    _launchFinvuJourney(context, uiConfig: _getCredTheme()),
+                onPressed: () => _launchFinvuJourney(context,
+                    uiConfig: _getCredTheme(), appLocale: 'hi'),
                 style: _getCredTheme().elevatedButtonTheme!.style,
                 child: const Text("CRED Journey"),
               ),
@@ -255,8 +257,8 @@ class MyHomePage extends StatelessWidget {
 
               // Groww
               ElevatedButton(
-                onPressed: () =>
-                    _launchFinvuJourney(context, uiConfig: _getGrowwTheme()),
+                onPressed: () => _launchFinvuJourney(context,
+                    uiConfig: _getGrowwTheme(), appLocale: 'gu'),
                 style: _getGrowwTheme().elevatedButtonTheme!.style,
                 child: const Text(
                   "Groww Journey",
@@ -266,8 +268,8 @@ class MyHomePage extends StatelessWidget {
 
               // Axis
               OutlinedButton(
-                onPressed: () =>
-                    _launchFinvuJourney(context, uiConfig: _getAxisTheme()),
+                onPressed: () => _launchFinvuJourney(context,
+                    uiConfig: _getAxisTheme(), appLocale: 'ml'),
                 style: _getAxisTheme().outlinedButtonTheme!.style,
                 child: const Text(
                   "Axis Journey",
